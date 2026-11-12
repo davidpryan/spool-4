@@ -1,0 +1,50 @@
+# SPOOL-4's manual screenshots: ./build.sh --shots
+wait 600
+tap REC
+wait 2500
+tapkey 7
+wait 300
+tapkey 4
+wait 300
+tapkey 7
+wait 600
+tapkey 9
+wait 600
+tapkey 4
+wait 700
+tapkey 7
+wait 300
+tapkey 7
+wait 1600
+tap REC
+wait 200
+tap REC
+turn ALGO 1
+tapkey 4
+wait 200
+tapkey 7
+wait 200
+tapkey 11
+wait 600
+tapkey 9
+wait 300
+tap ENV
+turn ALGO 1
+tapkey 14
+wait 900
+tapkey 16
+wait 900
+tap ENV
+turn K1 10
+wait 1400
+shot screen-loops.png
+tap REC
+wait 900
+shot screen-overdub.png
+tap REC
+tap SEL
+wait 200
+shot screen-sound.png
+tap GLO
+wait 200
+shot screen-setup.png

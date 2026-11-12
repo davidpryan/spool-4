@@ -1,0 +1,87 @@
+# SPOOL-4 in the host simulator: ./build.sh --host
+wait 600
+expect sel 0
+expect bars 0
+# REC from a stop: a bar's count-in (100 BPM: 2.4 s), then the first take
+tap REC
+wait 100
+expect rec 1
+expect playing 1
+wait 2450
+expect rec 2
+# play four kicks (C4 = key 7) over about a bar and three quarters
+tapkey 7
+wait 600
+tapkey 7
+wait 600
+tapkey 9
+wait 1200
+tapkey 7
+wait 1700
+# REC closes it at the nearest bar: 2 bars, and goes on overdubbing
+tap REC
+wait 40
+expect bars 2
+expect rec 3
+expect events 4
+# REC again: the empty overdub is no layer
+tap REC
+wait 40
+expect rec 0
+expect layers 1
+expect heard 4
+# UNDO and REDO
+tap SEQ
+wait 30
+expect heard 0
+press SEL
+tap SEQ
+release SEL
+wait 30
+expect heard 4
+# an overdub adds a layer; UNDO takes only it away
+tap REC
+wait 30
+tapkey 4
+wait 300
+tap REC
+wait 30
+expect layers 2
+expect heard 5
+tap SEQ
+wait 30
+expect heard 4
+# loop 2: play without recording, then CAPTURE
+turn ALGO 1
+wait 2600
+expect sel 1
+tapkey 0
+wait 400
+tapkey 4
+wait 400
+tapkey 7
+wait 400
+tap ENV
+wait 40
+expect bars 1
+expect heard 3
+# FX held for a whole bar erases them
+press FX
+wait 2600
+release FX
+wait 30
+expect heard 0
+# double loop 1
+turn ALGO -1
+wait 30
+tap LFO
+wait 30
+expect bars 4
+expect heard 8
+tap PLAY
+wait 60
+expect playing 0
+press SEQ
+wait 1200
+expect card 9
+release SEQ

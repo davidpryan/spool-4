@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPOOL-4 words for a screen reader (fm1-reader): the text on the screen <TAB> what to say.
+# url: https://davidpryan.github.io/spool-4/words/
+SPOOL-4	spool 4
+LOOPS	loops
+OVERDUB	overdub

@@ -1,0 +1,26 @@
+# SPOOL-4's build settings (fm1-base tools/build.py)
+name = "SPOOL-4"
+id_prefix = "FM-1_23"          # dev FM-1_2300, releases FM-1_23XXYYZZ
+usb_manufacturer = "SPOOL-4"
+usb_product = "SPOOL-4 FM-1"
+words = "words.tsv"
+o2 = []
+ble = true
+ble_stack = "own"
+ble_pairing = true
+ble_central = true
+usb_host = false
+usb_audio_in = false
+usb_audio_out = false
+midi_stamp = false
+emu = ["midi"]
+tagline = "four loops you record by playing"
+repo = "https://github.com/davidpryan/spool-4"
+licence = "MPL-2.0"
+credits = "Built on fm1-base and felucca-bsp, from Felucca by Leo Kuroshita (Hügelton Instruments). After loopers, the OP-1 and the MPC's live record. Fonts: Barlow (SIL OFL 1.1)."
+author = "David Ryan"
+description = "SPOOL-4 is a loop recorder for notes. Play, and it keeps it: the first take sets a loop's length to the nearest bar, every pass after is an overdub layer that UNDO takes away and REDO brings back. Quantise is a dial applied as it plays, never to the notes. Hold FX to erase as the playhead passes, hold ARP for note repeat, double or halve a loop, play it at half or double speed, and CAPTURE what you just played on the keys even if nothing was recording. Its own synth and drums, MIDI out over USB and Bluetooth."
+tags = ["sequencer", "synth", "midi", "experimental"]
+install = "https://davidpryan.github.io/spool-4/install/"
+site = "https://davidpryan.github.io/spool-4/"
+screenshot = "app/docs/img/screen-loops.png"
