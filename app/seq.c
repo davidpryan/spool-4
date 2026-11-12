@@ -391,6 +391,19 @@ static int loop_halve(void)                             /* the first half kept *
     return 1;
 }
 
+static uint32_t capture_ready(void)                    /* the notes CAPTURE would take now (the screen) */
+{
+    uint32_t now = (uint32_t)((float)T.now / samples_per_tick()), first = now, i, n = 0;
+    for (i = 0; i < 128u && i < L.cap_w; i++) {
+        uint32_t k = (L.cap_w - 1u - i) % 128u;
+        if (now - L.cap[k].t > 8u * BAR || first - L.cap[k].t > (i ? BAR : 2u * BAR))
+            break;
+        first = L.cap[k].t;
+        n++;
+    }
+    return n;
+}
+
 /* CAPTURE: the last bars played on the keys into the loop as a new layer (empty: as many bars as the playing took,
  * 1, 2, 4 or 8) */
 static int capture(void)

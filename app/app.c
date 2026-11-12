@@ -72,11 +72,13 @@ void app_frame(void)
         K.msg_until = 0;
         K.redraw = 1;
     }
-    if (T.playing && now - last >= 40u)
+    if ((T.playing || now - last >= 500u) && now - last >= 40u)
         K.redraw = 1;
     for (i = 0; i < 16u; i++)
         if (heard[i])
             heard[i]--;
+    if (kit_hint_due(HINTS))
+        K.redraw = 1;
     lights();
     if (K.redraw) {
         K.redraw = 0;

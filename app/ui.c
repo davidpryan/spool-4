@@ -52,6 +52,11 @@ static const char *const CARD_TEXT[NB] = {
 #endif
 };
 
+static const char *const HINTS[NB] = {
+    [B_SEL] = "SEQ REDO  EDIT CLEAR  LFO HALVE  TAP: SOUND", [B_FX] = "ERASING AS IT PASSES",
+    [B_ARP] = "HOLD A KEY: IT REPEATS (K2 GRID)",
+};
+
 static void dirty(void) { U.dirty = 1; }
 static loop_t *lp_sel(void) { return &P.loop[L.sel % NLOOP]; }
 static void settings_save(void) { plat_store_save(OBJ_SETTINGS, &set, sizeof set); }
@@ -406,7 +411,14 @@ static void draw(void)
             cv_rect(90, 70, 60, 50, K_PANEL);
             text_c(120, 80, &FONT_L, t, K_REC);
         }
-        cv_text(6, 186, &FONT_T, L.erase ? "ERASING AS IT PASSES" : "KEYS ALWAYS KEPT: ENV CAPTURES THEM", L.erase ? K_REC : K_FAINT);
+        {
+            uint32_t n = capture_ready();
+            char t[40] = "ENV: CAPTURE ";
+            i_cat(t, (int32_t)n);
+            s_cat(t, n == 1u ? " NOTE JUST PLAYED" : " NOTES JUST PLAYED");
+            cv_text(6, 186, &FONT_T, L.erase ? "ERASING AS IT PASSES" : n ? t : "KEYS ALWAYS KEPT: ENV CAPTURES THEM",
+                    L.erase ? K_REC : n ? K_FG : K_FAINT);
+        }
     }
     cv_blit(0, 22);
     if (U.page == PG_LOOPS) {
@@ -426,6 +438,7 @@ static void draw(void)
     } else {
         kit_knobs("VALUE", "", "", "", ACCENT);
     }
+    kit_hint(HINTS, ACCENT);
 }
 
 static void lights(void)
